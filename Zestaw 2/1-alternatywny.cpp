@@ -3,7 +3,8 @@
 #include <cmath>
 
 //liczba n jest liczba fibonnaciego w.t.w. gdy 
-//5x^2+4 oraz 5x^2-4 sa kwadratem liczby naturalnej
+//5x^2+4 lub 5x^2-4 sa kwadratem liczby naturalnej
+//https://en.wikipedia.org/wiki/Fibonacci_number#Identification
 
 bool isSquare(unsigned number){
 	unsigned s = sqrt(number);
