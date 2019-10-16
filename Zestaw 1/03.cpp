@@ -1,32 +1,38 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
-vector<int> podsumy;
-
-int a = 1;
-int b = 1;
-int c;
-
-int szukana;
 int main() {
-    cin >> szukana;
+  int x;
+  cin >> x;
 
-    while (a < szukana) {
-        podsumy.push_back(a);
-        for (int i = 1; i < podsumy.size(); i++) {
-            int nowa_podsuma = podsumy[i - 1] + a;
-            if (nowa_podsuma == szukana) {
-                cout << "istnieje" << endl;
-                return 0;
-            }
-            podsumy[i - 1] = nowa_podsuma;
-        }
-        c = a+b;
-        a = b;
-        b = c;
+  // będziemy liczyć ciąg fibbonaciego, ale przechowywać liczby na koncach
+  // aktualnie liczonego przedzialu a1, b1 - wskaznik dolny a2, b2 - wskaznik
+  // gorny
+  // przesuwamy wskaznik u gory, kiedy suma < zadanej, przesuwamy wskaznik u dolu, odejmujac wyraz ciagu, ktory juz nie jest w zakresie, mniejszajac sume
+  // konczymy gdy wskaznik dolny przejdzie dalej niz gorny
+  uint a1 = 0, b1 = 1, a2 = 0, b2 = 1;
+
+  int sum = 0;
+
+  while ((b1 <= b2) && (sum >= 0)) {
+    if (sum == x) {
+        cout << "istnieje"; 
+      return 0;
     }
+    if (sum < x) {
+      sum += b2; // dodajemy do sumy kolejny wyraz
 
-    cout << "nie istnieje" << endl;
+      b2 += a2; // i podmieniamy ten wyraz na następny
+      a2 = b2 - a2;  
+    } else if (sum > x) {
+      sum -= b1;  // odejmujemy "odcieta" liczbe z ciagu
+
+      b1 += a1; //nast wyraz ciagu
+      a1 = b1 - a1;  
+    }
+  }
+
+  cout << "nie istnieje" << endl;
+  return 1;
 }
