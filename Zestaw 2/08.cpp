@@ -1,29 +1,29 @@
-#include <iostream>
 #include <cmath>
-#include <sstream>
+#include <iostream>
 
-std::string intToString(unsigned i){
-	std::stringstream s;
-	s << i;
-	return s.str();
-}
+using namespace std;
 
-int main(){
-	unsigned a, b, n, remainder;
-	std::cout << "Podaj a : "; std::cin >> a;
-	std::cout << "Podaj b : "; std::cin >> b;
-	std::cout << "Podaj n : "; std::cin >> n;
+int main() {
+  unsigned a, b, n;
+  cout << "Podaj a: ";
+  cin >> a;
+  cout << "Podaj b: ";
+  cin >> b;
+  cout << "Podaj n: ";
+  cin >> n;
 
-	std::string result = intToString(a/b);
+  // wypisz czesc calkowita
+  cout << a / b << ".";
 
-	result += ".";
+  // wylicz reszte pod ulamki
+  a = (a % b) * 10;
+  // dopoki dokladnosc > 0
+  while (n--) {
+    // wypisz kolejna czesc dziesietna
+    cout << a / b;
+    // wylicz kolejna reste
+    a = (a % b) * 10;
+  }
 
-	while(n--){
-		a = (a % b) * 10;		
-		result += (a / b) + '0';
-	}
-
-	std::cout << result << std::endl;
-
-	return 0;	
+  cout << endl;
 }
