@@ -10,22 +10,16 @@ int main() {
     cin >> a;
     cin >> b;
 
-    int rzad = 10;
-
     while (a > 0) {
         int cyfra = a % 10;
         ilosc_cyfr[cyfra] = ilosc_cyfr[cyfra] + 1;
         a /= 10;
-        rzad *= 10;
     }
-
-    rzad = 1;
 
     while (b > 0) {
         int cyfra = b % 10;
         ilosc_cyfr[cyfra] = ilosc_cyfr[cyfra] - 1;
         b /= 10;
-        rzad *= 10;
     }
 
     for (int x : ilosc_cyfr) {
