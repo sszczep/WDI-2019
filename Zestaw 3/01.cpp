@@ -1,33 +1,28 @@
 #include <iostream>
-#include <vector>
 
+// Napisać program zamieniający liczbę naturalną z systemu 10 na
+// podstawę 2-16
 using namespace std;
 
-int number;
-int base;
+void print_in_base(unsigned n, unsigned base) {
+  const string glyphs = "0123456789abcef";
+  string transformed = "";
+  while (n > 0) {
+    transformed += glyphs[n % base];
+    n /= base;
+  }
 
-vector<char> digits;
-
-char getCharForDigit(int num) {
-    return (num > 9) ? ('a' + (num % 10)) : ('0' + num);
+  for (int i = transformed.length() - 1; i >= 0; --i) {
+    cout << transformed[i];
+  }
+  cout << endl;
 }
 
 int main() {
-    cin >> number;
-    cin >> base;
+  unsigned n;
+  cin >> n;
 
-    if (base < 2 || base > 16) {
-        cout << "base ma sie zawierac w [2,16]";
-        return 0;
-    }
-
-    while (number > 0) {
-        digits.push_back(getCharForDigit(number % base));
-        number /= base;
-    }
-
-    for (int i = digits.size() - 1; i >= 0; i--) {
-        cout << digits[i];
-    }
-
+  for (size_t i = 2; i <= 16; ++i) {
+    print_in_base(n, i);
+  }
 }
