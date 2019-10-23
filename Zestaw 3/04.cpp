@@ -3,6 +3,8 @@
  * reprezentuje jako tablice "segmentow", tj. kazdy segment to 16 kolejnych cyfr liczby
  * "silniowanej". Mnoze kazdy z tych segmentow przez kolejne liczby do n i po kazdym
  * mnozeniu danego segmentu cyfry niemieszczace sie w tym segmencie dodaje do kolejnego
+ * 
+ * A w sumie segment to taka cyfra, tyle ze 16 xD
  */
 #include <iostream>
 #include <iomanip>
@@ -20,55 +22,41 @@ const uint64_t DZIELNIK = 10'000'000'000'000'000;
  * wiec segmentow bedzie ceil(2568/16) = 161 
  */
 const int N_SEGMENTOW = 161;
-uint64_t segmenty[N_SEGMENTOW] = {0};
+uint64_t segmenty[N_SEGMENTOW];
 
-int poczatek = 0;
-
+//koniec oznacza indeks najwyzszego segmentu zawierajacego jakies cyfry
+int koniec = 0;
 int n;
 
 int main() {
     cin >> n;
-    //zaczynamy silnie od 1ki oczywiscie
     segmenty[0] = 1;
 
-    //dla kazdego i = 2 .. n
+    for (int i = 1; i < N_SEGMENTOW; i++) {
+        segmenty[i] = 0;
+    }
+
     for (int i = 2; i <= n; i++) {
-        //przemnazamy kazdy segment przez i poczynajac od najwiekszych segmentow, czyli od konca
-        for (int j = poczatek; j >= 0; j--) {
-            //jak ten segment wynosi 0 to go pomijamy
-            if (segmenty[j] == 0) {
-                continue;
-            }
-            uint64_t pomnozony_segment = segmenty[j] * i;
-            uint64_t nowy_segment = pomnozony_segment % DZIELNIK;
-            uint64_t dodatek_seg_wyzej = pomnozony_segment / DZIELNIK;
-            segmenty[j] = nowy_segment;
+        uint64_t dodatek_seg_wyzej = 0; //analogicznie jak w mnozeniu pisemnym
 
-            //jesli segment*n nie miesci sie w 16 cyfrach, to cyfry nadmiarowe przenosimy do segmentu wyzej
-            //takie zdarzenie moze oczywiscie zajsc kaskadowo, wiec petla
-            int k = j + 1;
-            while (dodatek_seg_wyzej > 0) {
-                pomnozony_segment = segmenty[k] + dodatek_seg_wyzej;
-                nowy_segment = pomnozony_segment % DZIELNIK;
+        for (int j = 0; j <= koniec; j++) {
+            if (segmenty[j] > 0 || dodatek_seg_wyzej > 0) {
+                uint64_t pomnozony_segment = segmenty[j] * i + dodatek_seg_wyzej;
+                uint64_t nowy_segment = pomnozony_segment % DZIELNIK;
                 dodatek_seg_wyzej = pomnozony_segment / DZIELNIK;
+                segmenty[j] = nowy_segment;
 
-                segmenty[k] = nowy_segment;
-
-                if (k > poczatek) {
-                    poczatek = k;
+                if (dodatek_seg_wyzej > 0 && j == koniec) {
+                    koniec++;
                 }
-
-                k++;
             }
         }
     }
 
-    //wypisujemy pierwszy segment
-    cout << segmenty[poczatek];
+    cout << segmenty[koniec];
     
-    //i dla kazdego kolejnego bedziemy musieli uzupelnic zera z przodu segmentu
     cout << setfill('0');
-    for (int i = poczatek - 1; i >= 0; i--) {
+    for (int i = koniec - 1; i >= 0; i--) {
         cout << setw(16) << segmenty[i];
     }
 }
