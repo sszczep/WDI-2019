@@ -22,6 +22,8 @@ const uint64_t DZIELNIK = 10'000'000'000'000'000;
 const int N_SEGMENTOW = 161;
 uint64_t segmenty[N_SEGMENTOW] = {0};
 
+int poczatek = 0;
+
 int n;
 
 int main() {
@@ -32,7 +34,7 @@ int main() {
     //dla kazdego i = 2 .. n
     for (int i = 2; i <= n; i++) {
         //przemnazamy kazdy segment przez i poczynajac od najwiekszych segmentow, czyli od konca
-        for (int j = N_SEGMENTOW - 1; j >= 0; j--) {
+        for (int j = poczatek; j >= 0; j--) {
             //jak ten segment wynosi 0 to go pomijamy
             if (segmenty[j] == 0) {
                 continue;
@@ -51,26 +53,22 @@ int main() {
                 dodatek_seg_wyzej = pomnozony_segment / DZIELNIK;
 
                 segmenty[k] = nowy_segment;
+
+                if (k > poczatek) {
+                    poczatek = k;
+                }
+
                 k++;
             }
         }
     }
 
-    //szukamy miejsca, od ktorego bedziemy wypisywac zawartosc
-    int poczatek_silni;
-    for (int i = N_SEGMENTOW - 1; i >= 0; i--) {
-        if (segmenty[i] != 0) {
-            poczatek_silni = i;
-            break;
-        }
-    }
-
     //wypisujemy pierwszy segment
-    cout << segmenty[poczatek_silni];
+    cout << segmenty[poczatek];
     
     //i dla kazdego kolejnego bedziemy musieli uzupelnic zera z przodu segmentu
     cout << setfill('0');
-    for (int i = poczatek_silni - 1; i >= 0; i--) {
+    for (int i = poczatek - 1; i >= 0; i--) {
         cout << setw(16) << segmenty[i];
     }
 }
