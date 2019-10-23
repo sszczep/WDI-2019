@@ -6,7 +6,7 @@ const uint64_t n = 1000;
 int main() {
     // Zliczamy ile cyfr ma n!
     // Dzięki temu wiemy o jakiej wielkości tablicę musimy zaalokować
-    // Wykorzystamy własność, że (część całkowita logarytmu o podstawie 10 z liczby x) - 1 jest równa ilości cyfr liczby x
+    // Wykorzystamy własność, że (część całkowita logarytmu o podstawie 10 z liczby x) + 1 jest równa ilości cyfr liczby x
     double temp = 0;
     for(uint64_t i = 1; i <= n; i++) temp += std::log10(i);
     uint64_t digitsCount = floor(temp) + 1;
