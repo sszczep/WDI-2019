@@ -1,37 +1,36 @@
 #include <iostream>
 
-using namespace std;
-
-int top10[10] = { 0 };
-
 int main() {
-    int input;
-    cin >> input;
+    // W zadaniu nie mamy podanej maksymalnej wielkości wprowadzanych liczb więc użyjemy
+    // zmiennych typu uint64_t
+    // Wiemy z treści zadania, że wprowadzane liczby są naturalne, więc możemy pominąć znak (unsigned)
+    // Sidenote: Jeśli liczby przekraczałyby zakres zmiennej typu uint64_t, należy użyć stringów i porównywać leksykograficznie
 
-    while (input != 0) {
-        for (int i = 0; i < 10; i++) {
-            //jesli wprowadzona liczba jest wieksza niz i-ta liczba w top10...
-            if (input >= top10[i]) {
-                //...to przesuwamy nastepne elementy top10 o 1 miejsce do tylu...
-                for (int j = 9; j > i; j--) {
-                    top10[j] = top10[j - 1];
-                }
-                //...i wstawiamy wprowadzona liczbe w i-te miejsce
-                top10[i] = input;
+    uint64_t input;
+    uint64_t tab[10] = { 0 };
+
+    do {
+        std::cin >> input;
+
+        // Najpierw sprawdzamy czy wprowadzona liczba nie jest mniejsza niż nasze top10
+        // Jeśli tak to ją pomijamy
+        if(input < tab[9]) continue;
+
+        for(int i = 0; i < 10; i++) {
+            // Jeżeli wprowadzona liczba jest większa od liczby na pozycji tab[i]
+            if(input > tab[i]) {
+                // Cofamy elementy o indeksach i...9 o jedną pozycję do tyłu
+                for(int j = 9; j > i; j--) tab[j] = tab[j - 1];
+
+                // Przypisujemy nową wartość do elementu tablicy o indeksie i
+                tab[i] = input;
+
+                // Wychodzimy z pętli for
                 break;
             }
         }
+    } while(input != 0);
 
-        //ten kawałek kodu sluzy tylko do wyswietlania zawartosci tablicy z 10 najwiekszymi elementami, zaczyna sie tu:
-        cout << endl << endl;
-        for (int i = 0; i < 10; i++) {
-            cout << i + 1 << " - " << top10[i] << endl;
-        }
-        cout << endl;
-        //i konczy tutaj
-
-        cin >> input;
-    }
-
-    cout << endl << "10 co do wielkosci wartosc to: " << top10[9];
+    // Wypisujemy wynik
+    std::cout << tab[9];
 }
