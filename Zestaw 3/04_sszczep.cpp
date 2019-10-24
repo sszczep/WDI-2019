@@ -8,8 +8,8 @@ int main() {
     // Dzięki temu wiemy o jakiej wielkości tablicę musimy zaalokować
     // Wykorzystamy własność, że (część całkowita logarytmu o podstawie 10 z liczby x) + 1 jest równa ilości cyfr liczby x
     double temp = 0;
-    for(uint64_t i = 1; i <= n; i++) temp += std::log10(i);
-    uint64_t digitsCount = floor(temp) + 1;
+    for(uint64_t i = 1; i <= n; i++) temp += log10(i);
+    uint64_t digitsCount = temp + 1;
 
     // Alokujemy tablicę o wielkości digitsCount
     uint64_t *digits = new uint64_t[digitsCount]();
@@ -36,4 +36,7 @@ int main() {
         if(i == 0) break;
         i--;
     }
+
+    // Zwalniamy pamięć po wykonaniu programu
+    delete[] digits;
 }
