@@ -18,7 +18,7 @@ int main() {
     for(uint64_t multiplier = 2; multiplier <= n; multiplier++) {
         // Mnożymy kolejne cyfry mnożnej przez mnożnik i iloczyn zapisujemy
         // Wąskie gardło algorytmu - iloczyn digits[i] i multiplier musi być mniejszy niż 2^64 -1
-        for(uint64_t i = 0; i < digitsCount - 1; i++) digits[i] *= multiplier;
+        for(uint64_t i = 0; i < digitsCount; i++) digits[i] *= multiplier;
 
         // Wyłączamy pełne dziesiątki do kolejnych elementów tablicy
         for(uint64_t i = 0; i < digitsCount - 1; i++) {
