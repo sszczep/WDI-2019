@@ -6,15 +6,27 @@ const int MAX = 1000;
 const int START_NATURALNYCH = 1;
 const int KONIEC_NATURALNYCH = 1000;
 
-int main() {
-    // Konfigurujemy generator pseudolosowy
+void wypelnijPseudolosowo(int t[]) {
     srand(time(NULL));
 
-    int t[MAX];
     for(int i = 0; i < MAX; i++) {
         // Wypełniamy tablicę pseudolosowymi liczbami z przedziału 1-1000
         t[i] = (rand() % (KONIEC_NATURALNYCH - START_NATURALNYCH + 1)) + START_NATURALNYCH;
     }
+}
+
+void wypelnijKolejne(int t[]) {
+    for(int i = 0; i < MAX; i++) {
+        // Wypełniamy tablicę kolejnymi liczbami naturalnymi
+        t[i] = i;
+    }
+}
+
+int main() {
+    int t[MAX];
+
+    wypelnijPseudolosowo(t);
+    //wypelnijKolejne(t);
 
     int najdluzszyPodciag = 2;
     int obecnaDlugosc = 2;
