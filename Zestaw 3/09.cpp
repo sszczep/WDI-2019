@@ -14,14 +14,14 @@ bool skoki(int t[N]) {
 
     for (int i = 0; i < N; i++) {
         if (dost[i]) {
-            int copy = dost[i];
+            int copy = t[i];
             int podzielnik = 2;
             while (copy > 1) {
                 if (copy % podzielnik == 0) {
                     if (i + podzielnik < N) {
                         dost[i + podzielnik] = true;
                     }
-                    if (podzielnik + i == N - 1) {
+                    if (i + podzielnik == N - 1) {
                         return true;
                     }
                     while (copy % podzielnik == 0) {
