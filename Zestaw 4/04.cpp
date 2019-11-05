@@ -1,3 +1,7 @@
+/**
+ * Wobec faktu, ze sa to liczby naturalne po prostu szukamy najwiekszej
+ * sumy elementow w kolumnie, i najmniejszej sumy elementow w wierszu.
+ */
 #include <iostream>
 
 using namespace std;
@@ -14,35 +18,36 @@ int main() {
         }
     }
 
-    int sumy_wiersza[MAX];
-    int sumy_kolumny[MAX];
-
+    int sumaWiersz[MAX];
     for (int i = 0; i < MAX; i++) {
-        sumy_wiersza[i] = 0;
-        sumy_kolumny[i] = 0;
+        sumaWiersz[i] = 0;
     }
 
-    for (int w = 0; w < MAX; w++) {
-        for (int k = 0; k < MAX; k++) {
-            sumy_wiersza[w] += t[w][k];
-            sumy_kolumny[k] += t[w][k];
+    //przy okazji szukania najwiekszej sumy w kolumnie posumujemy sobie wiersze
+    int najwKol;
+    int najwSumaKol = 0;
+    for (int k = 0; k < MAX; k++) {
+        int sumaKol = 0;
+        for (int w = 0; w < MAX; w++) {
+            sumaKol += t[w][k];
+            sumaWiersz[w] += t[w][k];
+        }
+        if (sumaKol > najwSumaKol) {
+            najwSumaKol = sumaKol;
+            najwKol = k;
         }
     }
 
-    double najwiekszy = 0.0;
-    int najW;
-    int najK;
-    for (int w = 0; w < MAX; w++) {
-        for (int k = 0; k < MAX; k++) {
-            double iloraz = (double)sumy_kolumny[k] / sumy_wiersza[w];
-            if (iloraz > najwiekszy) {
-                najwiekszy = iloraz;
-                najW = w;
-                najK = k;
-            }
+    int najmWiersz = 0;
+    int najmSumaWiersz = sumaWiersz[0];
+
+    for (int w = 1; w < MAX; w++) {
+        if (sumaWiersz[w] < najmSumaWiersz) {
+            najmSumaWiersz = sumaWiersz[w];
+            najmWiersz = w;
         }
     }
 
-    cout << "kolumna: "  << najK << endl;
-    cout << "wiersz: " << najW;
+    cout << "kolumna: "  << najwKol << endl;
+    cout << "wiersz: " << najmWiersz;
 }
