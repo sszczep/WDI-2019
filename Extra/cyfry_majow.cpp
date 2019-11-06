@@ -8,7 +8,6 @@
  * 7200 -> 1000
  */
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
