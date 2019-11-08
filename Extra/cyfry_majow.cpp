@@ -11,11 +11,10 @@
 
 using namespace std;
 
-char getDigit(unsigned int digit) {
-    return (digit < 10) ? ('0' + digit) : ('A' + digit - 10);
-}
-
 string int_to_mayan(unsigned int int_number) {
+    if (int_number == 0) {
+        return "0";
+    }
     //Akumulator, w ktorym bedziemy trzymac kolejne cyfry - wynik to odwrocony acc
     string acc = "";
     /**
@@ -29,7 +28,7 @@ string int_to_mayan(unsigned int int_number) {
         unsigned int base = (pos == 2) ? 18 : 20;
         unsigned int digit = int_number % base;
         //musimy zamienic 0..19 na '0'..'J'
-        acc += getDigit(digit);
+        acc += (digit < 10) ? ('0' + digit) : ('A' + digit - 10);
         int_number /= base;
         pos++;
     }
