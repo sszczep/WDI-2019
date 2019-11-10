@@ -21,8 +21,8 @@ struct dane {
 };
 
 bool szachuja_sie(dane dane) {
-    //jest tylko 1 hetman wiec jak maja sie szachowac
-    if (dane.N == 1) {
+    //jesli nie ma 2 hetmanow to jak sie maja szachowac
+    if (dane.N < 2) {
         return false;
     }
     //informacje o kazdym hetmanie przenosimy na plansze typu bool (prawda -> jest tam hetman)
