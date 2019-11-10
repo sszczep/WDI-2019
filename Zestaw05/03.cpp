@@ -1,3 +1,10 @@
+/**
+ * sprawdzanie moznaby ominac, gdyby komus sie udalo ustalic
+ * od jakiego N (zakladajac, ze kazdy hetman opisuje innego)
+ * z zasady pudelkowania Dirichleta na pewno sa 2 w jednej linii
+ * 
+ * jak ktos to ogarnie to jest k0z4k
+ */
 #include <iostream>
 using namespace std;
 
@@ -14,6 +21,10 @@ struct dane {
 };
 
 bool szachuja_sie(dane dane) {
+    //jest tylko 1 hetman wiec jak maja sie szachowac
+    if (dane.N == 1) {
+        return false;
+    }
     //informacje o kazdym hetmanie przenosimy na plansze typu bool (prawda -> jest tam hetman)
     bool plansza[BOK][BOK];
     for (int w = 0; w < BOK; w++) {
