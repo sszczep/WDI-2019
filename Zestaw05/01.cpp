@@ -107,14 +107,19 @@ ulamek potega(ulamek u, int w) {
 }
 
 int main() {
-    ulamek a = wczytaj();
-    ulamek b = wczytaj();
-    int wykladnik;
-    cin >> wykladnik;
-    cout << endl;
-    wypisz(suma(a, b));
-    wypisz(roznica(a, b));
-    wypisz(iloczyn(a, b));
-    wypisz(iloraz(a, b));
-    wypisz(potega(a, wykladnik));
+    try {
+        ulamek a = wczytaj();
+        ulamek b = wczytaj();
+        int wykladnik;
+        cin >> wykladnik;
+        cout << endl;
+        wypisz(suma(a, b));
+        wypisz(roznica(a, b));
+        wypisz(iloczyn(a, b));
+        wypisz(iloraz(a, b));
+        wypisz(potega(a, wykladnik));
+    }
+    catch (const char* e) {
+        cout << e;
+    }
 }
