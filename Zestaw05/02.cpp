@@ -50,16 +50,6 @@ void wypisz(ulamek u) {
     cout << u.l << "/" << u.m << endl;
 }
 
-ulamek suma(ulamek a, ulamek b) {
-    int nowy_mianownik = nww(a.m, b.m);
-    a.l *= nowy_mianownik / a.m;
-    b.l *= nowy_mianownik / b.m;
-    ulamek wynik;
-    wynik.l = a.l + b.l;
-    wynik.m = nowy_mianownik;
-    return skroc(wynik);
-}
-
 ulamek roznica(ulamek a, ulamek b) {
     int nowy_mianownik = nww(a.m, b.m);
     a.l *= nowy_mianownik / a.m;
@@ -89,21 +79,6 @@ ulamek iloraz(ulamek a, ulamek b) {
         dzielnik.m *= -1;
     }
     return iloczyn(a, dzielnik);
-}
-
-ulamek potega(ulamek u, int w) {
-    ulamek wynik = u;
-    if (w > 0) {
-        for (int i = 1; i < w; i++) {
-            wynik = iloczyn(wynik, u);
-        }
-    }
-    else {
-        for (int i = 0; i >= w; i--) {
-            wynik = iloraz(wynik, u);
-        }
-    }
-    return wynik;
 }
 
 enum rodzaj_ukladu {
