@@ -35,7 +35,9 @@ bool okalajaca(int t[N]) {
     for (int i = 0; i < N; i++) {
         suma += wagi[i] = waga(t[i]);
     }
-    if (suma % 3 == 0) {
+    //jesli suma wag jest niepodzielna przez 3 to nie da sie jej rozlozyc na 3 sumy, elo
+    //dzieki Adrian R. za sprawne oko
+    if (suma % 3 != 0) {
         return false;
     }
     return podzbior(wagi, 0, 0, 0, 0);
