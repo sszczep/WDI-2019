@@ -5,7 +5,7 @@
 #include <iostream>
 using namespace std;
 
-const int N = 100;
+const int N = 10;
 
 //odwazniki(t, 0, do_odwazenia, "");
 void odwazniki(int t[N], int odwaznik, int do_odwazenia, string kombinacja) {
@@ -28,4 +28,11 @@ void odwazniki(int t[N], int odwaznik, int do_odwazenia, string kombinacja) {
         odwazniki(t, odwaznik + 1, do_odwazenia + t[odwaznik], kombinacja + 'P'); //wrzucamy na prawa szalke
         odwazniki(t, odwaznik + 1, do_odwazenia              , kombinacja + '0'); //a no i na zadna nie wrzucamy xD
     }
+}
+
+int main() {
+    int t[] = {1, 5, 5, 10, 20, 3, 3, 7, 8, 5};
+    int do_odwazenia;
+    cin >> do_odwazenia;
+    odwazniki(t, 0, do_odwazenia, "");
 }
