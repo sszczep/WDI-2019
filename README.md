@@ -1,4 +1,4 @@
-### Celem tego repo jest umieszczanie rozwiązań z _WDI z roku 2019_ od dr. hab. Gajęckiego.
+### Celem tego repo jest umieszczanie rozwiązań z _WDI z roku 2019_ od dr. Gajęckiego.
 
 Parę konwencji: 
 - Zadania z danego zestawu umieszczamy w folderach `ZestawXX`, gdzie `XX` to nr zestawu.
