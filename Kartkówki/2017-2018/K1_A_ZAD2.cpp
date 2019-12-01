@@ -1,14 +1,13 @@
 #include <iostream>
 using namespace std;
 
-const int N = 5;
+const int N = 8;
 int tab[N];
 
 int idx(int s, int k) {
     int dl = k - s + 1;
-
     for (int i = dl; i > 0; i--) {
-        for (int pocz = s; pocz <= k - dl + 1; pocz++) {
+        for (int pocz = s; pocz <= k - i + 1; pocz++) {
             int sTab = 0;
             int sIdx = 0;
             for (int j = pocz; j < pocz + i; j++) {
@@ -46,5 +45,5 @@ int main() {
     for (int i = 0; i < N; i++) {
         cin >> tab[i];
     }
-    cout << dl();
+    cout << endl << dl();
 }
