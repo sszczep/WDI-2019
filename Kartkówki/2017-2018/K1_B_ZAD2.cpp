@@ -19,12 +19,12 @@ int podciag(int tab[N]) {
     if(tab[i] % 2 == 1) {
       for(int j = pocz_nieparzystych; j <= i; j++) {
         if(czyPalindrom(tab, j, i))
-          if((i - j) > najdl) najdl = i - j;
+          if((i - j + 1) > najdl) najdl = i - j + 1;
       }
     } else pocz_nieparzystych = -1;
   }
 
-  return najdl + 1;
+  return najdl;
 }
 
 int main() {
