@@ -35,7 +35,7 @@ node *scalIter(node *l, node *r) {
 //node *result = nullptr;
 //node *last = nullptr;
 //node *result = scalRekur(l, r, result, last);
-void scalRekur(node *l, node *r, node *result, node *last) {
+void scalRekur(node *l, node *r, node *&result, node *last) {
     if (l or r) {
         if (!r or (l and l->value <= r->value)) {
             append(last, l);
