@@ -9,7 +9,8 @@ struct node{
     node* next;
 }
 
-bool toRemove(int n){
+bool toRemove(node *item){
+    n=item->val;
     int cnt2=0, cnt1=0;
     while (n>0){
         switch (n%3)
@@ -24,7 +25,7 @@ bool toRemove(int n){
 
 void remove_rek(node* item, node* prev){
     if (item==NULL) return;
-    else if (toRemove(item->val)){
+    else if (toRemove(item)){
         else{
             prev->next=item->next;
             delete item;
@@ -39,7 +40,7 @@ void remove_rek(node* item, node* prev){
 void removeBadItems(node* &head){
     //usuwamy wszystkie złe elementy z początku listy, aż natrafimy na pierwszy dobry,
     //który będzie nowym headem
-    while(head!=NULL and toRemove(head->val)){
+    while(head!=NULL and toRemove(head)){
         node* next=head->next;
         delete head;
         head=next;
