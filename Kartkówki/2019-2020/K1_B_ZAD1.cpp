@@ -89,9 +89,9 @@ bool da_sie2(int t1[N], int t2[N]) {
             for (int pocz2 = 0; pocz2 <= N - dl; pocz2++) {
                 int s1 = p1[pocz1 + dl - 1] - (pocz1 > 0 ? p1[pocz1 - 1] : 0);
                 int s2 = p2[pocz2 + dl - 1] - (pocz2 > 0 ? p2[pocz2 - 1] : 0);
-                
+
                 //ewentualnie if (rozk(s1+s2)) - zalezy od interpretacji
-                if (rozk(s1) && rozk(s2)) {
+                if (rozk2(s1) && rozk2(s2)) {
                     return true;
                 }
             }
