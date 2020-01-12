@@ -7,11 +7,7 @@ struct node {
     node *next;
 };
 
-int split(node *a, node *b) {
-    if (b == nullptr) {
-        return 0;
-    }
-
+int split(node *a, node *&b) {
     while (a != nullptr) {
         node *bTmp = b;
         node *bTmpPrev = nullptr;
@@ -20,9 +16,18 @@ int split(node *a, node *b) {
             if (bTmp == a) {
                 int added = 0;
                 while (a != nullptr) {
-                    bTmpPrev->next = new node;
-                    bTmpPrev->next->val = a->val;
-                    bTmpPrev = bTmpPrev->next;
+                    if (bTmpPrev == nullptr) {
+                        bTmpPrev = new node;
+                        //przypadek w ktorym modyfikujemy b to taki, gdy oba zbiory zawieraja sie w sobie
+                        //wtedy b jest w calosci nowa lista, wiec musimy zmienic wskaznik poczatkowy
+                        b = bTmpPrev;
+                        bTmpPrev->val = a->val;
+                    }
+                    else {
+                        bTmpPrev->next = new node;
+                        bTmpPrev->next->val = a->val;
+                        bTmpPrev = bTmpPrev->next;
+                    }
                     a = a->next;
                     added++;
                 }
@@ -54,9 +59,21 @@ int main() {
     node *a = new node;
     a->next = nullptr;
     a->val = 3;
+    node *x = a;
+    wypisz(a);
+    wypisz(x);
+    cout << split(a, x) << endl;
+    wypisz(a);
+    wypisz(x);
     node *b = new node;
     b->next = a;
     b->val = 2;
+    node *y = b;
+    wypisz(b);
+    wypisz(y);
+    cout << split(b, y) << endl;
+    wypisz(b);
+    wypisz(y);
     node *c = new node;
     c->next = b;
     c->val = 1;
