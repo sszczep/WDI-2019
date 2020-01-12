@@ -45,9 +45,11 @@ int uniq(node *&a, node *&b) {
         }
         else {
             if (a->val > b->val) {
+                bPrev = b;
                 b = b->next;
             }
             else {
+                aPrev = a;
                 a = a->next;
             }
         }
