@@ -20,13 +20,16 @@ int C(int x) {
     return result;
 }
 
-int func(int x, int y, int n) {
+int func(int x, int y, int n, char c = '-') {
     if(x == y) return 1;
     if(x > y || n == 0) return 0;
 
     n--;
 
-    return func(A(x), y, n) + func(B(x), y, n) + func(C(x), y, n);
+    return 
+          ( c != 'A' ? func(A(x), y, n, 'A') : 0)
+        + ( c != 'B' ? func(B(x), y, n, 'B') : 0) 
+        + ( c != 'C' ? func(C(x), y, n, 'C') : 0);
 }
 
 int main() {
