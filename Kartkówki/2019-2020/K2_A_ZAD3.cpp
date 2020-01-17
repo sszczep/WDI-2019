@@ -45,17 +45,18 @@ int remove(node *&list) {
 
     if (!mSubTwice) {
         node *mSubFirst;
+        node *mSubAfterLast = mSubLast->next; //musimy zapisac ten wskaznik, bo po usunieciu ostatnio mSubLast->next da nam segfaulta
 
         if (mSubPrev == nullptr) {
             mSubFirst = list;
-            list = mSubLast->next;
+            list = mSubAfterLast;
         }
         else {
             mSubFirst = mSubPrev->next;
-            mSubPrev->next = mSubLast->next;
+            mSubPrev->next = mSubAfterLast;
         }
 
-        while (mSubFirst != mSubLast->next) {
+        while (mSubFirst != mSubAfterLast) {
             node *next = mSubFirst->next;
             delete mSubFirst;
             mSubFirst = next;
