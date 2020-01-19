@@ -8,7 +8,6 @@ struct node {
 
 int remove(node *&list) {
     node *mSubPrev; //wskaznik przed poczatkiem kawalka do wyciecia
-    node *mSubLast;
     int mSubLength = 0;
     bool mSubTwice = true; //flaga na sytuacje, gdy mamy >= 2 kawalki maksymalne tej samej dlugosci
 
@@ -18,14 +17,12 @@ int remove(node *&list) {
     while (listCopy != nullptr) {
         if (listCopy->next != nullptr and listCopy->val == listCopy->next->val) {
             node *subPrev = prev;
-            node *subLast = listCopy->next;
             int subLength = 2;
             listCopy = listCopy->next;
 
             while (listCopy->next != nullptr and listCopy->next->val == listCopy->val) {
                 subLength++;
                 listCopy = listCopy->next;
-                subLast = listCopy;
             }
 
             if (subLength == mSubLength) {
@@ -34,7 +31,6 @@ int remove(node *&list) {
 
             if (subLength > mSubLength) {
                 mSubPrev = subPrev;
-                mSubLast = subLast;
                 mSubLength = subLength;
                 mSubTwice = false;
             }
@@ -44,24 +40,22 @@ int remove(node *&list) {
     }
 
     if (!mSubTwice) {
-        node *mSubFirst;
-        node *mSubAfterLast = mSubLast->next; //musimy zapisac ten wskaznik, bo po usunieciu ostatnio mSubLast->next da nam segfaulta
+        node *mSubToDel = mSubPrev == nullptr ? list : mSubPrev->next;
+
+        for (int i = 0; i < mSubLength - 1; i++) {
+            node *next = mSubToDel->next;
+            delete mSubToDel;
+            mSubToDel = next;
+        }
 
         if (mSubPrev == nullptr) {
-            mSubFirst = list;
-            list = mSubAfterLast;
+            list = mSubToDel->next;
         }
         else {
-            mSubFirst = mSubPrev->next;
-            mSubPrev->next = mSubAfterLast;
+            mSubPrev->next = mSubToDel->next;
         }
-
-        while (mSubFirst != mSubAfterLast) {
-            node *next = mSubFirst->next;
-            delete mSubFirst;
-            mSubFirst = next;
-        }
-
+        delete mSubToDel;
+        
         return mSubLength;
     }
     else {
