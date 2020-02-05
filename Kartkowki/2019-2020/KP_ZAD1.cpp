@@ -11,7 +11,7 @@ int nwd(int a, int b) {
 bool ustawienia() {
     /**
      * dla kazdego mozliwego ustawienia poziomego klocka
-     * probujemy dolozyc pionowy i sprawdzamy warunekz NWD
+     * probujemy dolozyc pionowy i sprawdzamy warunek z NWD
      * 
      * naszymy koordynatami beda lewa czesc klocka poziomego
      * i dolna czesc klocka pionowego
@@ -22,12 +22,19 @@ bool ustawienia() {
         for (int horY = 0; horY < N; horY++) {
             for (int verX = 0; verX < N; verX++) {
                 for (int verY = 0; verY < N - 1; verY++) {
-                    //jezeli sie przecinaja to idziemy do nastepnej iteracji
-                    if (verX == horX || verX == horX + 1) {
-                        if (verY == horY || verY == horY - 1) {
-                            continue;
-                        }
+                    /**
+                     * klocki nie moga lezec w tych samych kolumnach/wierszach
+                     * 
+                     * warunki kolejno:
+                     * pionowy nie moze byc w pionowej linii z lewa polowa poziomego
+                     * pionowy nie moze byc w pionowej linii z prawa polowa poziomego
+                     * dolna polowa pionowego nie moze byc w poziomej linii z poziomym
+                     * gorna polowa pionowego nie moze byc w poziomej linii z poziomym
+                     */
+                    if (verX == horX || verX == horX + 1 || verY == horY || verY + 1 == horY) {
+                        continue;
                     }
+
                     //nwd(a,b,c,d) == nwd(a, nwd(b, nwd(c, d)))
                     if (nwd(tab[horX][horY],
                         nwd(tab[horX + 1][horY], 
