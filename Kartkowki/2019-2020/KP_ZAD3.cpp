@@ -23,7 +23,10 @@ void reorder(klocek *&klocki) {
      * okazuje sie, ze jesli policzymy ile jest poczatkow/koncow
      * dla kazdej cyfry, to mozemy wyznaczyc poczatek i koniec
      * ciagu mag-mino. dla wszystkich innych cyfr niz poczatek/koniec
-     * liczba wystapien bedzie rowna.
+     * liczba wystapien bedzie rowna. analogicznie do zad 2
+     * 
+     * moze byc tez tak, ze liczba wystapien wszystkich liczb
+     * na lewej i prawej polowie jest rowna, wtedy poczatek jest dowolny
      */
     while (zliczanie != nullptr) {
         p[zliczanie->a]++;
@@ -37,14 +40,27 @@ void reorder(klocek *&klocki) {
         return;
     }
 
-    int poczatek;
-    int koniec;
+    int poczatek = -1;
+    int koniec = -1;
     for (int i = 0; i < 10; i++) {
         if (p[i] > k[i]) {
             poczatek = i;
         }
         if (p[i] < k[i]) {
             koniec = i;
+        }
+    }
+    //przypadek, gdy poczatek/koniec wybieramy dowolnie
+    if (poczatek == -1) {
+        for (int i = 0; i < 10; i++) {
+            if (p[i] > 0) {
+                poczatek = i;
+                continue;
+            }
+            if (k[i] > 0) {
+                koniec = i;
+                continue;
+            }
         }
     }
 
