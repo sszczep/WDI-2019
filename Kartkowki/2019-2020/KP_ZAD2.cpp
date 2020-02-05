@@ -15,7 +15,7 @@ klocek zestaw[N];
  * mozemy zauwazyc, ze da sie ulozyc ciag z klockow, jezeli
  * a) kazda cyfra wystepuje tyle samo razy na lewej i prawej polowie klocka
  * b) jak wyzej, z wyjatkiem, gdzie jedna cyfra wystepuje o 1 raz rzadziej na lewej
- *    a inna cyfra wystepuje o 1 raz czesciej na prawej (wtedy to okresla tez poczatek
+ *    a inna cyfra wystepuje o 1 raz rzadziej na prawej (wtedy to okresla tez poczatek
  *    i koniec naszego ciagu mag-min)
  */
 
