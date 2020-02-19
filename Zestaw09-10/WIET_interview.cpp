@@ -29,8 +29,8 @@ void func(node* row[N], node* col[N], bool t[N][N]){
                 newEl->down=col[c];
                 col[c]=newEl;
 
-                newEl->right=row[c];
-                row[c]=newEl;
+                newEl->right=row[r];
+                row[r]=newEl;
             }
         }
     }
